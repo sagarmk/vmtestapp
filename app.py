@@ -11,6 +11,7 @@ from flask import request
 import pandas as pd
 from sklearn import linear_model
 import pickle
+import jsonify
 
 app = Flask(__name__)
 
@@ -26,12 +27,18 @@ def index():
     return " <h1> Flask is running </h1> "
 
 
+@app.route('/api')
+def api():
+	return " <h1> API is running "
+
+
+
 @app.route('/predict', methods=['GET'])
 
 
 def predict():
     
-    my_var = request.args.get('my_var', None)
+    my_var = request.args.get('url', None)
 
     
 
@@ -60,7 +67,12 @@ def predict():
         # retrieve the most likely result, e.g. highest probability
         label = label[0][0]
         # print the classification
-        return('%s (%.2f%%)' % (label[1], label[2]*100))
+	#return('%s (%.2f%%)' % (label[1], label[2]*100))
+	#alpha = [label[1],label[2]]
+	pred={"predicted label":label[1],"confdence":label[2]}
+	#predictions = label
+	return(pred)
+       	#return (label[2][1])
 
     predicted_value = predictor(my_var)
 
@@ -70,4 +82,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(port=80,host='0.0.0.0')    
+    app.run(port=5000,host='0.0.0.0')    
