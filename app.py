@@ -71,7 +71,7 @@ def predict():
 	    #alpha = [label[1],label[2]]
         pred={"predicted label":label[1],"confdence":label[2]}
 	    #predictions = label
-        return(pred)
+        return(jsonify(pred))
        	#return (label[2][1])
 
     predicted_value = predictor(my_var)
