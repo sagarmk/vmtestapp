@@ -1,4 +1,4 @@
-# Keras Model serving with CI and Heroku
+# Keras Model serving 
 
 
 ## Build docker image
